@@ -4,9 +4,10 @@ using System.Linq;
 
 namespace GradeBook
 {
-    class Book
+    public class Book
     {
         private List<double> grades { get; set; }
+        public Statistics stats;
         private string name;
 
         public Book(string name)
@@ -20,42 +21,41 @@ namespace GradeBook
             grades.Add(grade);
         }
 
-        public void ShowStatistics()
+        public void GetStatistics()
         {
             LowGrade();
             HighGrade();
             Average();
         }
 
-        public void LowGrade()
+        public double LowGrade()
         {
-            double lowGrade = double.MaxValue;
             foreach (var grade in grades)
             {
-                if (grade < lowGrade)
+                if (grade < stats.Low)
                 {
-                    lowGrade = grade;
+                    stats.Low = grade;
                 }
             }
-            Console.WriteLine($"Low: {lowGrade}");
+            return stats.Low;
         }
 
-        public void HighGrade()
+        public double HighGrade()
         {
-            var highGrade = double.MinValue;
             foreach (var grade in grades)
             {
-                if (highGrade < grade)
+                if (stats.High < grade)
                 {
-                    highGrade = grade;
+                    stats.High = grade;
                 }
             }
-            Console.WriteLine($"High: {highGrade}");
+            return stats.High;
         }
 
-        public void Average()
+        public double Average()
         {
-            Console.WriteLine($"Average: {grades.Average()}");
+            stats.Average = grades.Average();
+            return stats.Average;
         }
     }
 }
