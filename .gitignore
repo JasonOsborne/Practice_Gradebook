@@ -6,6 +6,10 @@
 *.user
 *.sln.docstates
 
+# Test Garbage
+*.testlog
+*.manifest
+
 # Build results
 
 [Dd]ebug/
