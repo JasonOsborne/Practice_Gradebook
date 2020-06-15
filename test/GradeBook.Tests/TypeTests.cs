@@ -14,6 +14,8 @@ namespace GradeBook.Tests
 
             log = new WriteLogDelegate(ReturnMessage);
 
+            log += ReturnMessage;
+
             var result = log("hi");
             Assert.Equal("hi", result);
         }

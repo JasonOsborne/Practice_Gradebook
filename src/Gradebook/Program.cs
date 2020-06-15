@@ -1,7 +1,4 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
-using System;
-using System.Dynamic;
-using System.Runtime.InteropServices.ComTypes;
+﻿using System;
 
 namespace GradeBook
 {
@@ -9,9 +6,11 @@ namespace GradeBook
     {
         static void Main(string[] args)
         {
-            Book book = new Book("Jason's Gradebook");
+            Book book = new Book("SomeBook");
+
             double doubleVal;
             char charVal;
+            book.Name = "Jason's Gradebook";
 
             do
             {

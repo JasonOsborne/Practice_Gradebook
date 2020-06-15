@@ -4,18 +4,30 @@ using System.Linq;
 
 namespace GradeBook
 {
-    public class Book
+    public delegate void GradeAddedDelegate(object sender, EventArgs args);
+
+    public class NamedObject
+    {
+        public string Name { get; set; }
+
+        public NamedObject(string name)
+        {
+            Name = name;
+        }
+    }
+
+    public class Book : NamedObject
     {
         private List<double> grades;
         private Statistics stats = new Statistics();
-        public string Name { get; private set; }
         public static string SUBJECT = "Science";
 
-        public Book(string name)
+        public Book(string name) : base(name)
         {
             grades = new List<double>();
-            Name = name;
         }
+
+        public event GradeAddedDelegate GradeAdded;
 
         public void AddGrade(double grade)
         {
@@ -23,6 +35,10 @@ namespace GradeBook
             {
                 if (grade <= 100 && grade > 0)
                     grades.Add(grade);
+                if(GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
                 else throw new ArgumentException($"Invalid {nameof(grade)}.");
             }
             catch(ArgumentException ex)
